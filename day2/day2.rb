@@ -1,4 +1,4 @@
-#!/bin/env ruby
+#!/usr/bin/ruby
 
 order_total = 0
 box_re = /(\d+)x(\d+)x(\d+)/
