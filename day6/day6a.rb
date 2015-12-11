@@ -1,7 +1,11 @@
 #!/usr/bin/ruby
 
 display = Array.new(1000) { Array.new(1000) }
-display[0..999][0..999].fill(0)
+for x in 0..999
+  for y in 0..999
+    display[x][y] = 0
+  end
+end
 
 command_re = /(on|off|toggle)/
 coords_re  = /(\d+),(\d+) through (\d+),(\d+)/
@@ -18,19 +22,22 @@ $stdin.each_line do |ln|
   when 'on'
     for x in x1..x2
       for y in y1..y2
-        display[x][y] = 1
+        display[x][y] +=1
       end
     end
   when 'off'
     for x in x1..x2
       for y in y1..y2
-        display[x][y] = 0
+        display[x][y] -= 1
+        if display[x][y] < 0
+          display[x][y] = 0
+        end
       end
     end
   when 'toggle'
     for x in x1..x2
       for y in y1..y2
-        display[x][y] = 1 - display[x][y].to_i
+        display[x][y] += 2
       end
     end
   end
